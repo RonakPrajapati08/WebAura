@@ -1,4 +1,6 @@
 import { Check } from 'lucide-react';
+import { useState } from 'react';
+import ProjectModal from './modelform/ProjectModal';
 
 const plans = [
   {
@@ -54,6 +56,11 @@ const plans = [
 ];
 
 export default function Pricing() {
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => setIsModalOpen(true);
+
   return (
     <section id="pricing" className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -68,11 +75,10 @@ export default function Pricing() {
           {plans.map((plan, index) => (
             <div
               key={index}
-              className={`rounded-2xl p-8 ${
-                plan.popular
-                  ? 'bg-gradient-to-br from-blue-600 to-cyan-500 text-white shadow-2xl scale-105 border-4 border-blue-400'
-                  : 'bg-gray-50 border border-gray-200'
-              } transition-all hover:shadow-xl`}
+              className={`rounded-2xl p-8 ${plan.popular
+                ? 'bg-gradient-to-br from-blue-600 to-cyan-500 text-white shadow-2xl scale-105 border-4 border-blue-400'
+                : 'bg-gray-50 border border-gray-200'
+                } transition-all hover:shadow-xl`}
             >
               {plan.popular && (
                 <div className="bg-white text-blue-600 text-sm font-bold px-4 py-1 rounded-full inline-block mb-4">
@@ -118,11 +124,10 @@ export default function Pricing() {
 
               <button
                 onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                className={`w-full py-4 rounded-lg font-semibold transition-all ${
-                  plan.popular
-                    ? 'bg-white text-blue-600 hover:shadow-lg hover:scale-105'
-                    : 'bg-blue-600 text-white hover:bg-blue-700'
-                }`}
+                className={`w-full py-4 rounded-lg font-semibold transition-all ${plan.popular
+                  ? 'bg-white text-blue-600 hover:shadow-lg hover:scale-105'
+                  : 'bg-blue-600 text-white hover:bg-blue-700'
+                  }`}
               >
                 Get Started
               </button>
@@ -136,13 +141,18 @@ export default function Pricing() {
             Every business is unique. Let's discuss your specific needs and create a tailored package that fits your budget and goals.
           </p>
           <button
-            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+            // onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+            onClick={openModal}
             className="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors font-semibold"
           >
             Schedule a Consultation
           </button>
         </div>
       </div>
+
+      {/* Modal */}
+      <ProjectModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+
     </section>
   );
 }

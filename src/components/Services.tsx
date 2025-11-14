@@ -25,12 +25,12 @@ const services = [
     description: 'Get found by your customers with strategic SEO that improves rankings and drives traffic.',
     features: ['Keyword Research', 'On-Page SEO', 'Performance Tracking']
   },
-  {
-    icon: Smartphone,
-    title: 'Mobile Development',
-    description: 'Native and progressive web apps that deliver exceptional mobile experiences.',
-    features: ['Cross-Platform', 'App Store Ready', 'Push Notifications']
-  },
+  // {
+  //   icon: Smartphone,
+  //   title: 'Mobile Development',
+  //   description: 'Native and progressive web apps that deliver exceptional mobile experiences.',
+  //   features: ['Cross-Platform', 'App Store Ready', 'Push Notifications']
+  // },
   {
     icon: Zap,
     title: 'Website Maintenance',

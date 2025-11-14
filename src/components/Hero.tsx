@@ -87,16 +87,14 @@
 
 
 //seccond with check content
-"use client";
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, CheckCircle, Code2, Rocket, X } from "lucide-react";
+import { ArrowRight, CheckCircle, Code2 } from "lucide-react";
+import ProjectModal from "./modelform/ProjectModal";
 
 export default function Hero() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
 
   return (
     <section
@@ -185,128 +183,8 @@ export default function Hero() {
       </div>
 
       {/* Smooth Animated Modal */}
-      <AnimatePresence>
-        {isModalOpen && (
-          <>
-            {/* Overlay */}
-            <motion.div
-              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.25 }}
-              onClick={closeModal}
-            />
+      <ProjectModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
 
-            {/* Form Popup */}
-            <motion.div
-              className="fixed inset-0 flex items-center justify-center z-50 px-4"
-              initial={{ opacity: 0, scale: 0.95, y: 40 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 40 }}
-              transition={{ type: "spring", stiffness: 150, damping: 20 }}
-            >
-              <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-3">
-                <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-md sm:max-w-xl animate-fadeIn overflow-hidden">
-
-                  {/* Header Section */}
-                  <div className="flex items-center justify-between border-b border-gray-200 px-5 py-4 sm:px-8">
-                    <div className="flex items-center space-x-2">
-                      <Rocket className="w-6 h-6 text-blue-600" />
-                      <h2 className="text-lg sm:text-xl font-semibold text-slate-900">
-                        Start Your Project
-                      </h2>
-                    </div>
-
-                    {/* Close Button */}
-                    <button
-                      onClick={closeModal}
-                      className="text-gray-500 hover:text-gray-700 transition"
-                      aria-label="closebutton"
-                    >
-                      <X size={22} />
-                    </button>
-                  </div>
-
-                  {/* Scrollable Content */}
-                  <div className="max-h-[85vh] overflow-y-auto px-5 py-6 sm:px-8 sm:py-8">
-                    <form className="space-y-4">
-                      {/* Full Name */}
-                      <div>
-                        <label className="block text-left text-gray-700 font-medium mb-1 text-sm sm:text-base">
-                          Full Name
-                        </label>
-                        <input
-                          type="text"
-                          placeholder="Enter your name"
-                          className="w-full border border-gray-300 rounded-lg px-3 py-2 sm:px-4 sm:py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base"
-                        />
-                      </div>
-
-                      {/* Email + Phone */}
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-                        <div>
-                          <label className="block text-left text-gray-700 font-medium mb-1 text-sm sm:text-base">
-                            Email Address
-                          </label>
-                          <input
-                            type="email"
-                            placeholder="Enter your email"
-                            className="w-full border border-gray-300 rounded-lg px-3 py-2 sm:px-4 sm:py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base"
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-left text-gray-700 font-medium mb-1 text-sm sm:text-base">
-                            Phone Number
-                          </label>
-                          <input
-                            type="tel"
-                            placeholder="Enter your phone number"
-                            className="w-full border border-gray-300 rounded-lg px-3 py-2 sm:px-4 sm:py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base"
-                          />
-                        </div>
-                      </div>
-
-                      {/* City */}
-                      <div>
-                        <label className="block text-left text-gray-700 font-medium mb-1 text-sm sm:text-base">
-                          City
-                        </label>
-                        <input
-                          type="text"
-                          placeholder="Enter your city"
-                          className="w-full border border-gray-300 rounded-lg px-3 py-2 sm:px-4 sm:py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base"
-                        />
-                      </div>
-
-                      {/* Project Details */}
-                      <div>
-                        <label className="block text-left text-gray-700 font-medium mb-1 text-sm sm:text-base">
-                          Project Details
-                        </label>
-                        <textarea
-                          placeholder="Tell us about your project..."
-                          rows={4}
-                          className="w-full border border-gray-300 rounded-lg px-3 py-2 sm:px-4 sm:py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base"
-                        ></textarea>
-                      </div>
-
-                      {/* Submit Button */}
-                      <button
-                        type="submit"
-                        className="w-full bg-blue-600 text-white py-2.5 sm:py-3 rounded-lg font-semibold hover:bg-blue-700 transition-all"
-                      >
-                        Submit
-                      </button>
-                    </form>
-                  </div>
-                </div>
-              </div>
-
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
     </section>
   );
 }
