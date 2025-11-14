@@ -1,5 +1,17 @@
-import { Mail, Phone, MapPin, Send, MessageCircle } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, MessageCircle, ChevronsUpDownIcon, CheckIcon } from 'lucide-react';
 import { useState } from 'react';
+import { Fragment } from "react";
+import { Listbox, Transition } from "@headlessui/react";
+
+const services = [
+  { id: 0, name: "Select a Service", value: "" },
+  { id: 1, name: "Website Design", value: "website-design" },
+  { id: 2, name: "Web Development", value: "web-development" },
+  { id: 3, name: "E-Commerce", value: "ecommerce" },
+  { id: 4, name: "SEO Optimization", value: "seo" },
+  // { id: 5, name: "Mobile Development", value: "mobile" },
+  { id: 6, name: "Website Maintenance", value: "maintenance" },
+];
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -11,6 +23,7 @@ export default function Contact() {
     budget: '',
     message: ''
   });
+  const [selected, setSelected] = useState(services[0]);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
@@ -47,9 +60,9 @@ export default function Contact() {
     <section id="contact" className="py-20 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Let's Start Your Project</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Let’s Build Something Amazing Together</h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Ready to transform your digital presence? Get in touch with us today.
+            Ready to elevate your digital presence? Our team is here to turn your vision into reality.
           </p>
         </div>
 
@@ -57,7 +70,8 @@ export default function Contact() {
           <div>
             <h3 className="text-2xl font-bold text-gray-900 mb-6">Get in Touch</h3>
             <p className="text-gray-600 mb-8 leading-relaxed">
-              We'd love to hear about your project. Fill out the form and we'll get back to you within 24 hours.
+              {/* We'd love to hear about your project. Fill out the form and we'll get back to you within 24 hours. */}
+              We’d love to understand your project. Share a few details and our experts will get back to you within 12–24 hours.
             </p>
 
             <div className="space-y-6">
@@ -74,6 +88,7 @@ export default function Contact() {
                   >
                     webaura@gmail.com
                   </a>
+                  <p className='text-sm text-gray-400'>Let’s discuss your idea, ask questions, or get a custom quote.</p>
                 </div>
               </div>
 
@@ -90,6 +105,7 @@ export default function Contact() {
                   >
                     +91 75670 74348
                   </a>
+                  <p className='text-sm text-gray-400'>Talk directly with our project consultant.</p>
                 </div>
               </div>
 
@@ -108,6 +124,7 @@ export default function Contact() {
                   >
                     +91 75670 74348
                   </a>
+                  <p className='text-sm text-gray-400'>Quick replies | Fast quotes | Instant updates</p>
                 </div>
               </div>
 
@@ -119,17 +136,17 @@ export default function Contact() {
                 <div>
                   <div className="font-semibold text-gray-900 mb-1">Visit Us</div>
                   <div className="text-gray-600">
-                    123 Digital Avenue, Suite 100<br />
-                    San Francisco, CA 94105
+                    WebAura – Creative Digital Studio<br />
+                    Ahmedabad, Gujarat India
                   </div>
                 </div>
               </div>
             </div>
 
             <div className="mt-8 bg-gradient-to-br from-blue-600 to-cyan-500 rounded-xl p-6 text-white">
-              <h4 className="font-bold text-lg mb-2">Free Consultation</h4>
-              <p className="text-blue-100 text-sm">
-                Schedule a free 30-minute consultation to discuss your project and get expert advice.
+              <h4 className="font-bold text-lg mb-2">Free 30-Minute Website Consultation</h4>
+              <p className="text-blue-100 text-sm text-justify">
+                Book a free 30-minute session with our web experts to discuss your project, explore solutions, and get actionable advice tailored to grow your business online.
               </p>
             </div>
           </div>
@@ -149,7 +166,7 @@ export default function Contact() {
                     value={formData.name}
                     onChange={handleChange}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all"
-                    placeholder="John Doe"
+                    placeholder="enter your full name"
                   />
                 </div>
 
@@ -165,7 +182,7 @@ export default function Contact() {
                     value={formData.email}
                     onChange={handleChange}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all"
-                    placeholder="john@company.com"
+                    placeholder="enter your email"
                   />
                 </div>
               </div>
@@ -182,62 +199,56 @@ export default function Contact() {
                     value={formData.phone}
                     onChange={handleChange}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all"
-                    placeholder="+1 (555) 123-4567"
+                    placeholder="enter your phone number"
                   />
                 </div>
 
-                <div>
-                  <label htmlFor="company" className="block text-sm font-semibold text-gray-900 mb-2">
-                    Company Name
-                  </label>
-                  <input
-                    type="text"
-                    id="company"
-                    name="company"
-                    value={formData.company}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all"
-                    placeholder="Your Company"
-                  />
-                </div>
-              </div>
-
-              <div className="grid md:grid-cols-2 gap-6">
-                <div>
-                  <label htmlFor="service" className="block text-sm font-semibold text-gray-900 mb-2">
-                    Service Needed *
-                  </label>
-                  <select
-                    id="service"
-                    name="service"
-                    required
-                    value={formData.service}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all"
-                  >
-                    <option value="">Select a service</option>
-                    <option value="website-design">Website Design</option>
-                    <option value="web-development">Web Development</option>
-                    <option value="ecommerce">E-Commerce</option>
-                    <option value="seo">SEO Optimization</option>
-                    <option value="mobile">Mobile Development</option>
-                    <option value="maintenance">Website Maintenance</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label htmlFor="budget" className="block text-sm font-semibold text-gray-900 mb-2">
-                    Budget Range
-                  </label>
-                  <input
-                    type="text"
-                    id="budgetRage"
-                    name="budgetRage"
-                    value={formData.budget}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all"
-                    placeholder="Your budgetRage"
-                  />
+                <div className="w-full max-w-sm mx-auto">
+                  <Listbox value={selected} onChange={setSelected}>
+                    <div className="relative mt-1">
+                      <Listbox.Label className="block text-sm font-semibold text-gray-900 mb-2">
+                        Service Needed *
+                      </Listbox.Label>
+                      <Listbox.Button className="relative w-full cursor-pointer rounded-lg bg-white border border-gray-300 py-3 pl-4 pr-10 text-left shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent sm:text-sm transition-all">
+                        <span className="block truncate">{selected.name}</span>
+                        <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                          <ChevronsUpDownIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
+                        </span>
+                      </Listbox.Button>
+                      <Transition
+                        as={Fragment}
+                        leave="transition ease-in duration-100"
+                        leaveFrom="opacity-100"
+                        leaveTo="opacity-0"
+                      >
+                        <Listbox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-lg bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                          {services.map((service) => (
+                            <Listbox.Option
+                              key={service.id}
+                              className={({ active }) =>
+                                `relative cursor-pointer select-none py-2 pl-10 pr-4 ${active ? "bg-blue-100 text-blue-900" : "text-gray-900"
+                                }`
+                              }
+                              value={service}
+                            >
+                              {({ selected }) => (
+                                <>
+                                  <span className={`block truncate ${selected ? "font-medium" : "font-normal"}`}>
+                                    {service.name}
+                                  </span>
+                                  {selected ? (
+                                    <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-blue-600">
+                                      <CheckIcon className="h-5 w-5" aria-hidden="true" />
+                                    </span>
+                                  ) : null}
+                                </>
+                              )}
+                            </Listbox.Option>
+                          ))}
+                        </Listbox.Options>
+                      </Transition>
+                    </div>
+                  </Listbox>
                 </div>
               </div>
 
